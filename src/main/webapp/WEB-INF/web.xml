@@ -5,24 +5,4 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-  <display-name>My Web Application</display-name>
-
-  <!-- Example: Mapping LoginServlet if not using @WebServlet -->
-  <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>servlet.LoginServlet</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
-
-  <!-- Welcome page -->
-  <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
-  </welcome-file-list>
-
-
-
 </web-app>
