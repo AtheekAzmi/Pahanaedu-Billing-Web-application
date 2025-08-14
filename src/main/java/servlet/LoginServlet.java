@@ -6,12 +6,13 @@ import model.User;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import jakarta.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebServlet("/login") // Optional if also mapped in web.xml
+@WebServlet("/login") // Optional if also mapped in web.xml
 public class LoginServlet extends HttpServlet {
 
     private UserDAO userDAO;
@@ -30,20 +31,31 @@ public class LoginServlet extends HttpServlet {
 
 //        System.out.println("[DEBUG] Received credentials: " + username + " / " + password);
 
-        User loginUser = new User(username, password);
+        // User loginUser = new User(username, password);
 
-        try {
-            if (userDAO.validate(loginUser)) {
-                HttpSession session = request.getSession();
-                session.setAttribute("username", username);
-                session.setAttribute("password", password);
-                response.sendRedirect("dashboard.jsp");
-            } else {
-                response.sendRedirect("index.jsp?error=true");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        // try {
+        //     if (userDAO.validate(loginUser)) {
+        //         HttpSession session = request.getSession();
+        //         session.setAttribute("username", username);
+        //         session.setAttribute("password", password);
+        //         response.sendRedirect("dashboard.jsp");
+        //     } else {
+        //         response.sendRedirect("index.jsp?error=true");
+        //     }
+        // } catch (ClassNotFoundException e) {
+        //     e.printStackTrace();
+        // }
+        // use the DAO to validate user
+        if(userDAO.validateUser(username, password)){
+            HttpSession session = request.getSession();
+            session.setAttribute("user", username);
+            // redirect to dashboard controller or JSP
+            response.sendRedirect("dashboard.jsp");
+        } else {
+            // Pass error back to view
+            resp.sendRedirect("index.jsp?error=true");
         }
+                
 
     }
 }
