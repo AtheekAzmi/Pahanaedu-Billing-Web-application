@@ -1,5 +1,5 @@
 java/
-MyJDBC.java
+DBUtil.java
 
 target/
 !.mvn/wrapper/maven-wrapper.jar

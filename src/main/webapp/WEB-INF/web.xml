@@ -7,7 +7,7 @@
 
   <display-name>My Web Application</display-name>
 
-  <!-- Example: Mapping LoginServlet if not using @WebServlet -->
+  <!-- Mapping LoginServlet if not using @WebServlet -->
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>servlet.LoginServlet</servlet-class>
@@ -18,11 +18,14 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+
   <!-- Welcome page -->
   <welcome-file-list>
-    <welcome-file>login.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-
-
 
 </web-app>

@@ -5,10 +5,13 @@ import util.DBUtil;
 
 import java.sql.*;
 
-public class UserDAO {
-    private static final String LOGIN_QUERY = "SELECT username, password FROM users WHERE username = ? AND password = ?";
+import static util.DBUtil.*;
 
-    public boolean validate(User user) {
+public class UserDAO {
+
+    private static final String LOGIN_QUERY = "SELECT username, password FROM user_table WHERE username= ? AND password= ?";
+
+    public boolean validate(User user) throws ClassNotFoundException{
         boolean status = false;
 
         try (Connection connection = DBUtil.getConnection();
@@ -17,14 +20,13 @@ public class UserDAO {
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
 
-            try (ResultSet rs = ps.executeQuery()) {
-                status = rs.next(); // true if user exists
-            }
+            ResultSet rs = ps.executeQuery();
+            status = rs.next();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return status;
     }
+
 }
